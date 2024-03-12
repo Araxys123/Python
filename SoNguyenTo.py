@@ -1,46 +1,28 @@
 def is_prime(num):
     if num <= 1:
-        return False
-    if num <= 3:
-        return True
-    if num % 2 == 0 or num % 3 == 0:
-        return False
-    i = 5
-    while i * i <= num:
-        if num % i == 0 or num % (i + 2) == 0:
-            return False
-        i += 6
+        return False  # 1 and numbers less than 1 are not prime
+    for i in range(2, int(num // 2) + 1):
+        if num % i == 0:
+            return False  # If the number has a divisor other than 1 and itself, it's not prime
     return True
 
-def primes_less_than_n(n):
+def print_primes_and_next(n):
+    print("Các số nguyên tố <= n: ", n, ":")
     primes = []
-    for i in range(2, n):
-        if is_prime(i):
-            primes.append(i)
-    return primes
+    for num in range(2, n + 1):
+        if is_prime(num):
+            primes.append(num)
+            print(num, end=" ")
 
-n = int(input("Nhập n: "))
-if 0 < n <= 1000:
-    print("Các số nguyên tố bé hơn n là:", primes_less_than_n(n))
-else:
-    print("n phải thoả điều kiện 0 < n <= 1000")
+    print("\nSo nguyen to nho nhat nhưng lớn hơn n: ", n, ":", end=" ")
+    next_prime = n + 1
+    while True:
+        if is_prime(next_prime):
+            print(next_prime)
+            break
+        next_prime += 1
 
-# def LaSNT (n):
-    # if n < 2:
-    #  return False
-    # for i in range (2, n//2 + 1)
-    # if n % i = 0:
-    # return False
-    # return True
-
-#a KTSNT:
-# if LaSNT (n):
-# print("() là số nguyên tố", format(n))
-# else
-# print("() không là số nguyên tố", format(n))
-
-#b In ra các số SNT bé hơn n
-# print("Các số nguyên tố <= ()", format(n))
-# for i in range (2, n+1):
-# print ("%5d" % i, end:" ")
+if __name__ == '__main__':
+    n = int(input("Enter a number: "))
+print_primes_and_next(n)
 
